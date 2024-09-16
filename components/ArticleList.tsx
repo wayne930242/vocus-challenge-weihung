@@ -4,7 +4,6 @@ import { useArticles } from "@/hooks/useArticles";
 import { ArticleItem } from "./ArticleItem";
 import { DotLoader } from "react-spinners";
 import { toast } from "@/hooks/use-toast";
-import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 
 export const ArticlesList: FC<Props> = ({ initialArticles }) => {
