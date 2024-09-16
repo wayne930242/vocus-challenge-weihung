@@ -1,4 +1,3 @@
-// pages/articles/index.tsx
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
