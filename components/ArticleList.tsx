@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Article } from "@/types";
 import { useArticles } from "@/hooks/useArticles";
 import { ArticleItem } from "./ArticleItem";

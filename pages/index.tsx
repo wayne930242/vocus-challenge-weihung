@@ -1,10 +1,7 @@
 // pages/articles/index.tsx
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import {
-  dehydrate,
-  QueryClient,
-} from "@tanstack/react-query";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { fetchArticles } from "@/lib/api";
 import Layout from "@/components/Layout";
@@ -15,7 +12,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 interface ArticlesPageProps {
   firstArticle: Article;
-  initialArticles: Article[];
 }
 
 const USER_ID = "601aa114fd89780001d24d4d";
@@ -33,10 +29,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     console.error("Error fetching articles:", error);
   }
 
-  const articles = queryClient.getQueryData<Article[]>([
-    "articles",
-    USER_ID,
-  ]);
+  const articles = queryClient.getQueryData<Article[]>(["articles", USER_ID]);
 
   const firstArticle = articles?.[0] || {};
 
@@ -54,10 +47,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-const ArticlesPage: NextPage<ArticlesPageProps> = ({
-  firstArticle,
-  initialArticles,
-}) => {
+const ArticlesPage: NextPage<ArticlesPageProps> = ({ firstArticle }) => {
   return (
     <Layout>
       <Head>
