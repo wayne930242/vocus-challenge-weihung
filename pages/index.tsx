@@ -43,6 +43,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const shuffled = articles?.sort(() => 0.5 - Math.random()) ?? [];
   const selectedArticles = shuffled.slice(0, 4);
 
+  console.log("articles", selectedArticles);
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
@@ -73,7 +75,7 @@ const ArticlesPage: NextPage<ArticlesPageProps> = ({
         <meta name="twitter:image" content={firstArticle.thumbnailUrl} />
       </Head>
       <main id="main">
-        <ArticlesList initialArticles={initialArticles} />
+        <ArticlesList />
       </main>
     </Layout>
   );

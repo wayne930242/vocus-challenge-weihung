@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { Article } from "@/types";
 import { useArticles } from "@/hooks/useArticles";
 import { ArticleItem } from "./ArticleItem";
@@ -6,12 +6,13 @@ import { DotLoader } from "react-spinners";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-export const ArticlesList: FC<Props> = ({ initialArticles }) => {
-  const { data, error } = useArticles(initialArticles);
+export const ArticlesList: FC<Props> = () => {
+  const { data, error, isFetched } = useArticles();
+  const [shuffledArticles, setShuffledArticles] = useState<Article[]>([]);
 
-  const shuffledArticles = useMemo(() => {
-    if (!data) return [];
-    return data.sort(() => 0.5 - Math.random()).slice(0, 4);
+  useEffect(() => {
+    if (!data) return;
+    setShuffledArticles(data.sort(() => 0.5 - Math.random()).slice(0, 4));
   }, [data]);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export const ArticlesList: FC<Props> = ({ initialArticles }) => {
           />
         </div>
       ))}
-      {shuffledArticles.length === 0 && (
+      {shuffledArticles.length === 0 && isFetched && (
         <div className="flex justify-center items-center h-96 w-full">
           <p className="text-center text-4xl text-muted-foreground w-full font-bold">
             暫無文章
@@ -62,6 +63,4 @@ export const ArticlesList: FC<Props> = ({ initialArticles }) => {
   );
 };
 
-interface Props {
-  initialArticles: Article[];
-}
+interface Props {}
