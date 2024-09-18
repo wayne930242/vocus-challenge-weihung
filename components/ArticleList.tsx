@@ -4,17 +4,17 @@ import { useArticles } from "@/hooks/useArticles";
 import { ArticleItem } from "./ArticleItem";
 import { DotLoader } from "react-spinners";
 import { toast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
+import { cn, seededShuffle } from "@/lib/utils";
 
-export const ArticlesList: FC<Props> = ({ initArticles }) => {
+export const ArticlesList: FC<Props> = ({ initArticles, seed }) => {
   const { data, error, isFetched } = useArticles();
 
   const [shuffledArticles, setShuffledArticles] = useState<Article[]>(initArticles);
 
   useEffect(() => {
     if (!data) return;
-    setShuffledArticles(data.sort(() => 0.5 - Math.random()).slice(0, 4));
-  }, [data]);
+    setShuffledArticles(seededShuffle(data, seed).splice(0, 4));
+  }, [data, setShuffledArticles]);
 
   useEffect(() => {
     if (error) {
@@ -66,4 +66,5 @@ export const ArticlesList: FC<Props> = ({ initArticles }) => {
 
 interface Props {
   initArticles: Article[];
+  seed: number;
 }
