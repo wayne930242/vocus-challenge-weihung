@@ -43,8 +43,8 @@ export const ArticleItem: FC<Props> = ({
   return (
     <Card>
       <CardContent className="grid w-full gap-y-4 pt-6 grid-cols-[1fr,110px] items-start">
-        <CardTitle>
-          <h2 className="text-xl font-medium line-clamp-2">{title}</h2>
+        <CardTitle className="text-xl font-medium line-clamp-2">
+          {title}
         </CardTitle>
         <div className="w-[110px] h-[55px] relative">
           <Image
@@ -64,7 +64,7 @@ export const ArticleItem: FC<Props> = ({
       <div className="flex justify-between items-center px-6 pb-6">
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={userAvatarUrl} alt={userFullname} />
+            <Image src={userAvatarUrl} alt={userFullname} width={40} height={40} />
             <AvatarFallback>{userFullname}</AvatarFallback>
           </Avatar>
           {userFullname}
@@ -79,7 +79,7 @@ export const ArticleItem: FC<Props> = ({
           </LabelButton>
         </div>
       </div>
-    </Card>
+    </Card >
   );
 };
 

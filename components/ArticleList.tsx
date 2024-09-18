@@ -6,9 +6,10 @@ import { DotLoader } from "react-spinners";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-export const ArticlesList: FC<Props> = () => {
+export const ArticlesList: FC<Props> = ({ initArticles }) => {
   const { data, error, isFetched } = useArticles();
-  const [shuffledArticles, setShuffledArticles] = useState<Article[]>([]);
+
+  const [shuffledArticles, setShuffledArticles] = useState<Article[]>(initArticles);
 
   useEffect(() => {
     if (!data) return;
@@ -63,4 +64,6 @@ export const ArticlesList: FC<Props> = () => {
   );
 };
 
-interface Props {}
+interface Props {
+  initArticles: Article[];
+}
